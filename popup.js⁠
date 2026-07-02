@@ -1,0 +1,40 @@
+document.addEventListener('DOMContentLoaded', async () => {
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (!tab || !tab.url.includes("chatgpt.com")) return;
+
+  chrome.tabs.sendMessage(tab.id, { type: "GET_CURRENT_STATS" }, (response) => {
+    if (!response) return;
+
+    document.getElementById('green-count').innerText = response.greenCount || 0;
+    document.getElementById('red-count').innerText = (response.redCount || 0) + (response.yellowCount || 0);
+
+    if (response.verifiedPapers && response.verifiedPapers.length > 0) {
+      const btn = document.getElementById('exportBib');
+      btn.disabled = false;
+      
+      btn.onclick = () => {
+        let bibtexContent = "";
+        
+        response.verifiedPapers.forEach((paper, index) => {
+          const citeKey = `ai_ref_${index + 1}`;
+          bibtexContent += `@article{${citeKey},\n`;
+          bibtexContent += `  title  = {${paper.title}},\n`;
+          bibtexContent += `  author = {${paper.author || 'Unknown'}},\n`;
+          if (paper.doi) bibtexContent += `  doi    = {${paper.doi}},\n`;
+          bibtexContent += `  note   = {Verified via Academic Truth Extension}\n`;
+          bibtexContent += `}\n\n`;
+        });
+
+        const blob = new Blob([bibtexContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `verified_citations_${new Date().toISOString().slice(0,10)}.bib`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      };
+    }
+  });
+});
