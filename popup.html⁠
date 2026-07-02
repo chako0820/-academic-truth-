@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { width: 280px; padding: 15px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #fff; color: #1a202c; margin: 0; }
+    h3 { margin-top: 0; margin-bottom: 12px; font-size: 16px; color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px; }
+    .stat { display: flex; justify-content: space-between; margin: 8px 0; font-size: 13px; }
+    .stat span { color: #4a5568; }
+    #green-count { color: #22c55e; }
+    #red-count { color: #ef4444; }
+    .btn { width: 100%; padding: 10px; background: #1a202c; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 12.5px; font-weight: bold; margin-top: 12px; transition: background 0.2s; }
+    .btn:hover { background: #2d3748; }
+    .btn:disabled { background: #cbd5e0; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <h3>Academic Truth</h3>
+  <div class="stat"><span>Verified (Green):</span> <b id="green-count">0</b></div>
+  <div class="stat"><span>Hallucinations (Red/Yellow):</span> <b id="red-count">0</b></div>
+  <button id="exportBib" class="btn" disabled>Download BibTeX</button>
+  
+  <script src="popup.js"></script>
+</body>
+</html>
