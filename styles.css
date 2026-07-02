@@ -1,0 +1,56 @@
+.truth-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  cursor: help;
+  font-size: 13px;
+  font-weight: bold;
+  vertical-align: middle;
+  line-height: 1;
+  user-select: none;
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  will-change: transform;
+}
+
+.truth-badge:hover {
+  transform: scale(1.25);
+}
+
+.truth-badge.loading { 
+  color: #a1a1aa; 
+  animation: truth-pulse 1.5s infinite ease-in-out;
+}
+.truth-badge.green { color: #22c55e; }   
+.truth-badge.yellow { color: #eab308; }  
+.truth-badge.red { color: #ef4444; }     
+.truth-badge.gray { color: #94a3b8; }    
+
+@keyframes truth-pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+.fix-suggestion {
+  display: block;
+  background: rgba(34, 197, 94, 0.08); 
+  border-left: 4px solid #ef4444;       
+  padding: 10px 12px;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: #1a202c;                      
+  border-radius: 0 6px 6px 0;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+html.dark .fix-suggestion {
+  background: rgba(239, 68, 68, 0.15);  
+  border-left-color: #f87171;
+  color: #f3f4f6;                       
+}
+
+.markdown article { 
+  position: relative; 
+}
