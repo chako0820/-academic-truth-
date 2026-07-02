@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "Academic Truth: ChatGPT Reference Validator",
+  "version": "1.0.0",
+  "description": "Fight AI hallucinations by cross-checking ChatGPT citations with Crossref and Semantic Scholar in real-time.",
+  "permissions": [
+    "activeTab"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chatgpt.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
